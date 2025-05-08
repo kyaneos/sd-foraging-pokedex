@@ -470,6 +470,67 @@
 <body>
 
     <div class="pokedex-device">
+        <div class="info-modal-overlay" id="infoModalOverlay">
+            <div class="info-modal">
+                <button class="close-modal-button" id="closeModalButton">&times;</button>
+                <h2>About / References</h2>
+                <h3>Developer</h3>
+                <p>Created by Justin Moran</p>
+
+                <h3>Plant Information References</h3>
+                 <ul>
+                    <li>
+                        <strong>California Buckwheat:</strong>
+                        <a href="https://en.wikipedia.org/wiki/Eriogonum_fasciculatum" target="_blank" rel="noopener noreferrer">Wikipedia</a> |
+                        <a href="https://plants.usda.gov/DocumentLibrary/plantguide/pdf/pg_erfa2.pdf" target="_blank" rel="noopener noreferrer">USDA Plant Guide</a>
+                    </li>
+                     <li>
+                        <strong>Lemonade Berry:</strong>
+                        <a href="https://www.baronamuseum.com/201619" target="_blank" rel="noopener noreferrer">Barona Museum</a> |
+                        <a href="https://hiddensandiego.com/lemonade-berry.php" target="_blank" rel="noopener noreferrer">Hidden San Diego</a>
+                    </li>
+                     <li>
+                        <strong>California Coffeeberry:</strong>
+                        <a href="https://www.sandiego.edu/kumeyaay-garden/plant.php?ID=25" target="_blank" rel="noopener noreferrer">USD Kumeyaay Garden</a> |
+                        <a href="https://www.grassrootsecology.org/from-the-field/2023/10/9/native-plant-of-the-month-coffeeberry" target="_blank" rel="noopener noreferrer">Grassroots Ecology</a>
+                    </li>
+                    <li>
+                        <strong>Toyon:</strong>
+                         <a href="https://www.sandiego.edu/kumeyaay-garden/plant.php?ID=23" target="_blank" rel="noopener noreferrer">USD Kumeyaay Garden</a> |
+                         <a href="https://www.botgard.ucla.edu/toyon-preserves-recipe/" target="_blank" rel="noopener noreferrer">UCLA Botanical Garden</a>
+                    </li>
+                     <li>
+                        <strong>Prickly Pear:</strong>
+                        <a href="https://aihd.ku.edu/foods/prickly_pear_cactus.html" target="_blank" rel="noopener noreferrer">KU AIHD</a> |
+                        <a href="https://www.pbssocal.org/shows/tending-the-wild/a-guide-to-some-indigenous-foods-of-california" target="_blank" rel="noopener noreferrer">PBS SoCal</a>
+                    </li>
+                     <li>
+                        <strong>Miner's Lettuce:</strong>
+                        <a href="https://ucanr.edu/blogs/blogcore/postdetail.cfm?postnum=16972" target="_blank" rel="noopener noreferrer">UCANR Blog</a> |
+                        <a href="https://specialtyproduce.com/produce/Miners_Lettuce_5099.php" target="_blank" rel="noopener noreferrer">Specialty Produce</a>
+                    </li>
+                     <li>
+                        <strong>California Blackberry:</strong>
+                        <a href="https://www.adkinsarboretum.org/programs_events/ipp/common-blackberry.html" target="_blank" rel="noopener noreferrer">Adkins Arboretum</a> |
+                        <a href="https://www.fs.usda.gov/database/feis/plants/shrub/ruburs/all.html" target="_blank" rel="noopener noreferrer">USDA FS</a> |
+                        <a href="https://www.ballonafriends.org/plants" target="_blank" rel="noopener noreferrer">Friends of Ballona Wetlands</a>
+                    </li>
+                     <li>
+                        <strong>Elderberry:</strong>
+                        <a href="https://www.sandiego.edu/kumeyaay-garden/plant.php?ID=6" target="_blank" rel="noopener noreferrer">USD Kumeyaay Garden</a> |
+                        <a href="https://hiddensandiego.com/elderberry.php" target="_blank" rel="noopener noreferrer">Hidden San Diego</a>
+                    </li>
+                     <li>
+                        <strong>Acorns:</strong>
+                        <a href="https://www.visitcalifornia.com/experience/acorns-and-native-american-culture/" target="_blank" rel="noopener noreferrer">Visit California</a> |
+                        <a href="https://hiddensandiego.com/wild-acorn-cookies.php" target="_blank" rel="noopener noreferrer">Hidden San Diego</a> |
+                        <a href="https://hearstmuseum.berkeley.edu/exhibit/exploring-california-indigenous-food-practices-traditional-acorn-mush/" target="_blank" rel="noopener noreferrer">Hearst Museum</a>
+                    </li>
+                </ul>
+                 <h3>Disclaimer</h3>
+                 <p>This guide is for informational purposes only. Foraging can be dangerous. Always consult with a local expert and be 100% certain of identification before consuming any wild plant. Respect local regulations and private property.</p>
+            </div>
+        </div>
         <div class="start-screen" id="startScreen">
             <div class="start-screen-text">CLICK TO START</div>
         </div>
@@ -480,7 +541,9 @@
                 <div class="log-on-progress" id="logOnProgress"></div>
             </div>
         </div>
-
+        <button class="info-button" id="infoButton" title="About/References">
+            <i class="fas fa-info"></i>
+        </button>
         <div class="pokedex-leds">
             <div class="led red"></div>
             <div class="led yellow"></div>
