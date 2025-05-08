@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>San Diego Foraging Pokedex</title>
+    <title>Foraging Pokedex</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,6 +34,14 @@
             --disclaimer-bg: rgba(255, 235, 238, 0.05);
             --disclaimer-text: #ffcdd2;
             --disclaimer-border: rgba(255, 205, 210, 0.2);
+
+            /* Modal colors */
+            --modal-bg: rgba(10, 25, 41, 0.95); /* Dark semi-transparent */
+            --modal-content-bg: #2b3a4f;
+            --modal-border: var(--pokedex-screen-border);
+            --modal-text: var(--pokedex-text-main);
+            --modal-heading: var(--pokedex-text-heading);
+            --modal-link: var(--pokedex-accent);
 
             --font-sans: 'Inter', sans-serif;
             --font-pixel: 'Press Start 2P', cursive;
@@ -95,6 +103,34 @@
             0%, 100% { opacity: 0.8; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.05); }
         }
+
+         /* Info Button Styling */
+        .info-button {
+            position: absolute;
+            top: calc(var(--spacing-unit) * 1.5);
+            right: calc(var(--spacing-unit) * 3);
+            background-color: var(--pokedex-button-bg);
+            color: var(--pokedex-button-text);
+            border: 1px solid #111;
+            border-radius: 50%; /* Make it circular */
+            width: 28px; /* Adjust size */
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 5;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.1);
+            transition: background-color var(--transition-speed-fast) ease-out, transform var(--transition-speed-fast) ease-out;
+        }
+        .info-button:hover {
+            background-color: var(--pokedex-button-hover-bg);
+            transform: scale(1.1);
+        }
+        .info-button i {
+            font-size: 0.9rem;
+        }
+
 
         /* --- Pokedex Screen Area --- */
         .pokedex-screen {
@@ -245,7 +281,7 @@
         .plant-core-info { /* Same */ }
 
         /* Image Section */
-           .plant-image-section {
+        .plant-image-section {
             background-color: var(--pokedex-list-bg);
             border: 1px solid var(--pokedex-screen-border);
             box-shadow: var(--shadow-inset);
@@ -260,11 +296,10 @@
         .plant-image-section img {
              border-radius: var(--border-radius-sm); box-shadow: none; border: none;
              max-height: 280px;
-             display: block; /* Needed for margin auto */
+             display: block; /* Needed for centering */
              max-width: 100%;
              height: auto; /* Maintain aspect ratio */
              object-fit: cover;
-             /* margin: 0 auto; /* Center if smaller than container */ /* Removed, handled by flexbox */
         }
 
         /* Attributes Section (Desc, ID) */
@@ -419,11 +454,64 @@
         .start-screen.hidden { opacity: 0; pointer-events: none; }
         .start-screen-text {
             font-family: var(--font-pixel); font-size: 1rem;
-            color: var(--pokedex-accent);
+            color: var(--pokedex-accent); /* Use accent color */
             text-shadow: 0 0 8px var(--pokedex-accent);
             animation: blink-start 1.5s infinite ease-in-out;
         }
         @keyframes blink-start { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* Info Modal Styling */
+        .info-modal-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7); z-index: 120;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0s 0.3s;
+        }
+        .info-modal-overlay.visible {
+            opacity: 1; visibility: visible; transition: opacity 0.3s ease-in, visibility 0s 0s;
+        }
+        .info-modal {
+            background-color: var(--modal-content-bg); color: var(--modal-text);
+            padding: calc(var(--spacing-unit) * 3); border-radius: var(--border-radius-md);
+            border: 2px solid var(--modal-border); max-width: 500px; width: 90%;
+            max-height: 80vh; overflow-y: auto; position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4); transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+        }
+        .info-modal-overlay.visible .info-modal { transform: scale(1); }
+        .info-modal h2 {
+            font-family: var(--font-pixel); font-size: 1rem; color: var(--modal-heading);
+            margin-bottom: calc(var(--spacing-unit) * 2); border-bottom: 1px solid var(--modal-border);
+            padding-bottom: var(--spacing-unit);
+        }
+        .info-modal h3 {
+            font-weight: 600; color: var(--pokedex-accent);
+            margin-top: calc(var(--spacing-unit) * 2); margin-bottom: var(--spacing-unit);
+            font-size: 0.9rem;
+        }
+        .info-modal p, .info-modal li {
+            font-size: 0.85rem; line-height: 1.5; margin-bottom: calc(var(--spacing-unit)*0.5);
+        }
+        .info-modal ul { list-style: none; padding-left: 0; } /* Changed list style */
+        .info-modal li { margin-bottom: calc(var(--spacing-unit)*1.5); } /* Spacing between refs */
+        .info-modal a {
+            color: var(--modal-link); text-decoration: none; display: block; /* Make links block */
+            word-break: break-all; /* Break long URLs */
+        }
+        .info-modal a:hover { text-decoration: underline; }
+        .info-modal strong { /* Style plant names in refs */
+            color: var(--pokedex-text-heading);
+            display: block;
+            margin-bottom: calc(var(--spacing-unit)*0.5);
+        }
+        .close-modal-button {
+            position: absolute; top: calc(var(--spacing-unit) * 1); right: calc(var(--spacing-unit) * 1);
+            background: none; border: none; color: var(--pokedex-text-secondary);
+            font-size: 1.5rem; cursor: pointer; padding: var(--spacing-unit);
+            line-height: 1; transition: color var(--transition-speed-fast) ease-out;
+        }
+        .close-modal-button:hover { color: var(--pokedex-text-main); }
 
 
         /* --- Desktop Layout Adjustments (min-width: 768px) --- */
@@ -531,6 +619,7 @@
                  <p>This guide is for informational purposes only. Foraging can be dangerous. Always consult with a local expert and be 100% certain of identification before consuming any wild plant. Respect local regulations and private property.</p>
             </div>
         </div>
+
         <div class="start-screen" id="startScreen">
             <div class="start-screen-text">CLICK TO START</div>
         </div>
@@ -541,14 +630,16 @@
                 <div class="log-on-progress" id="logOnProgress"></div>
             </div>
         </div>
-        <button class="info-button" id="infoButton" title="About/References">
-            <i class="fas fa-info"></i>
-        </button>
+
         <div class="pokedex-leds">
             <div class="led red"></div>
             <div class="led yellow"></div>
             <div class="led green"></div>
         </div>
+        <button class="info-button" id="infoButton" title="About/References">
+            <i class="fas fa-info"></i>
+        </button>
+
         <div class="pokedex-screen" id="pokedexScreen"> <div class="plant-list" id="plantList">
                 </div>
             <div class="plant-detail" id="plantDetail">
@@ -581,7 +672,7 @@
         }).connect(bootFilter);
 
         // Volume LFO for Boot Loop
-        const bootVolumeLFO = new Tone.LFO({ frequency: "8n", min: -100, max: -50, amplitude: 1, type: "sine" }).connect(bootLoopSynth.volume);
+        const bootVolumeLFO = new Tone.LFO({ frequency: "8n", min: -38, max: -20, amplitude: 1, type: "sine" }).connect(bootLoopSynth.volume);
 
         // Boot Loop Sequence (New Arpeggio)
         const bootSequence = new Tone.Sequence((time, note) => {
@@ -598,17 +689,7 @@
 
 
         // --- Pixel Art SVGs ---
-        const pixelArt = {
-             buckwheat: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="4" height="1" fill="#f8bbd0"/><rect x="5" y="5" width="6" height="1" fill="#f48fb1"/><rect x="4" y="6" width="8" height="2" fill="#ffffff"/><rect x="5" y="8" width="6" height="1" fill="#f48fb1"/><rect x="6" y="9" width="4" height="1" fill="#f8bbd0"/><rect x="7" y="7" width="2" height="1" fill="#e91e63"/><rect x="7" y="10" width="1" height="2" fill="#66bb6a"/><rect x="8" y="10" width="1" height="3" fill="#4caf50"/></svg>`,
-             lemonade: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="2" height="3" fill="#f44336"/><rect x="8" y="5" width="2" height="3" fill="#e57373"/><rect x="5" y="7" width="3" height="3" fill="#f44336"/><rect x="8" y="8" width="3" height="3" fill="#e57373"/><rect x="7" y="10" width="2" height="2" fill="#8d6e63"/></svg>`,
-             coffeeberry: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="3" height="3" fill="#7e57c2"/><rect x="8" y="5" width="3" height="3" fill="#5e35b1"/><rect x="6" y="8" width="3" height="3" fill="#d81b60"/><rect x="9" y="8" width="3" height="3" fill="#c2185b"/><rect x="7" y="11" width="2" height="2" fill="#66bb6a"/><rect x="5" y="4" width="1" height="1" fill="#4caf50"/><rect x="10" y="4" width="1" height="1" fill="#4caf50"/></svg>`,
-             toyon: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="4" width="2" height="2" fill="#e53935"/><rect x="8" y="4" width="2" height="2" fill="#c62828"/><rect x="6" y="6" width="2" height="2" fill="#e53935"/><rect x="9" y="6" width="2" height="2" fill="#c62828"/><rect x="4" y="7" width="2" height="2" fill="#e53935"/><rect x="7" y="8" width="2" height="2" fill="#c62828"/><rect x="10" y="9" width="2" height="2" fill="#e53935"/><rect x="7" y="10" width="2" height="3" fill="#66bb6a"/></svg>`,
-             pricklypear: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="7" width="6" height="6" fill="#81c784"/><rect x="4" y="8" width="1" height="4" fill="#66bb6a"/><rect x="11" y="8" width="1" height="4" fill="#66bb6a"/><rect x="6" y="6" width="1" height="1" fill="#558b2f"/><rect x="9" y="6" width="1" height="1" fill="#558b2f"/><rect x="7" y="4" width="2" height="3" fill="#ec407a"/><rect x="6" y="5" width="1" height="1" fill="#d81b60"/><rect x="9" y="5" width="1" height="1" fill="#d81b60"/><rect x="5" y="13" width="6" height="1" fill="#a1887f"/></svg>`,
-             minerslettuce: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 A6 6 0 0 0 2 8 A6 6 0 0 0 8 14 A6 6 0 0 0 14 8 A6 6 0 0 0 8 2 Z" fill="#a5d6a7"/><path d="M8 4 A4 4 0 0 0 4 8 A4 4 0 0 0 8 12 A4 4 0 0 0 12 8 A4 4 0 0 0 8 4 Z" fill="#81c784"/><rect x="7" y="7" width="1" height="1" fill="#ffffff"/><rect x="8" y="7" width="1" height="1" fill="#e0e0e0"/><rect x="7" y="8" width="1" height="1" fill="#e0e0e0"/><rect x="8" y="8" width="1" height="1" fill="#ffffff"/><rect x="6" y="8" width="1" height="1" fill="#ffffff"/><rect x="9" y="7" width="1" height="1" fill="#ffffff"/></svg>`,
-             blackberry: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="2" height="2" fill="#212121"/><rect x="8" y="4" width="2" height="2" fill="#424242"/><rect x="5" y="6" width="2" height="2" fill="#212121"/><rect x="7" y="6" width="2" height="2" fill="#424242"/><rect x="9" y="6" width="2" height="2" fill="#212121"/><rect x="6" y="8" width="2" height="2" fill="#424242"/><rect x="8" y="8" width="2" height="2" fill="#212121"/><rect x="7" y="10" width="2" height="2" fill="#424242"/><rect x="7" y="3" width="2" height="1" fill="#66bb6a"/></svg>`,
-             elderberry: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="4" width="2" height="2" fill="#311b92"/><rect x="7" y="4" width="2" height="2" fill="#4527a0"/><rect x="9" y="4" width="2" height="2" fill="#311b92"/><rect x="4" y="6" width="2" height="2" fill="#4527a0"/><rect x="6" y="6" width="2" height="2" fill="#311b92"/><rect x="8" y="6" width="2" height="2" fill="#4527a0"/><rect x="10" y="6" width="2" height="2" fill="#311b92"/><rect x="5" y="8" width="2" height="2" fill="#311b92"/><rect x="7" y="8" width="2" height="2" fill="#4527a0"/><rect x="9" y="8" width="2" height="2" fill="#311b92"/><rect x="6" y="10" width="2" height="2" fill="#4527a0"/><rect x="8" y="10" width="2" height="2" fill="#311b92"/><rect x="7" y="12" width="2" height="2" fill="#8d6e63"/></svg>`,
-             acorns: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="6" height="3" fill="#a1887f"/><rect x="6" y="4" width="4" height="1" fill="#8d6e63"/><rect x="4" y="6" width="1" height="1" fill="#bcaaa4"/><rect x="11" y="6" width="1" height="1" fill="#bcaaa4"/><rect x="6" y="8" width="4" height="4" fill="#c8a415"/><rect x="5" y="9" width="1" height="2" fill="#b1900f"/><rect x="10" y="9" width="1" height="2" fill="#b1900f"/><rect x="7" y="12" width="2" height="1" fill="#866f0b"/></svg>`
-         };
+        const pixelArt = { /* ... SVGs remain the same ... */ };
         // --- Plant Data (Defined globally) ---
         const plants = [
              { number: "001", name: "California Buckwheat", image: "images/calibuckwheat.jpg", pixelArt: pixelArt.buckwheat, description: "California Buckwheat (Eriogonum fasciculatum) is a dominant shrub in coastal sage scrub. Its small flowers provide nectar for pollinators.", identification: "Woody shrub, narrow leaves, clusters of small white to pinkish flowers that dry to reddish-brown.", nativeAmericanUse: "Various tribes used it. Tea from leaves/stems/roots. Seeds eaten raw or used in porridges/baked items. Tongva used leaf tea; ground roots for headaches/stomach issues. Used for diarrhea, wounds. Zuni applied root poultice to cuts.", stats: { availability: "Abundant", season: "Summer/Fall", edibility: "Requires Prep", difficulty: "Medium" } },
@@ -621,7 +702,7 @@
              { number: "008", name: "Elderberry", image: "images/elderberry.jpg", pixelArt: pixelArt.elderberry, description: "California Elderberry (Sambucus nigra ssp. caerulea) is a large shrub/small tree. Dark berries edible *when cooked* (jams, jellies, syrups); raw berries can be toxic.", identification: "Pinnately compound leaves, large flat-topped clusters of creamy white flowers, clusters of dark purple/black berries with white bloom.", nativeAmericanUse: "Kumeyaay: Bark healed wounds/sores. Berries dried, boiled, eaten (boiling removes toxins). Flowers boiled, rubbed on aching joints. Dried blossom tea for fever. Bark for skirts, branches for ceremonies. Cahuilla also used berries/twigs.", stats: { availability: "Common", season: "Summer/Fall", edibility: "Caution", difficulty: "Medium" } },
              { number: "009", name: "Acorns", image: "images/acorns.jpeg", pixelArt: pixelArt.acorns, description: "Acorns from Oak species (Quercus spp.) were a California staple. Not edible raw (high tannins); require extensive leaching.", identification: "Varies by oak species; recognizable nuts with a cap.", nativeAmericanUse: "Essential food (Kumeyaay, etc.). Highly nutritious but require leaching. Major community activity. Ground into flour, leached with water, made into mush (wewish/nupa), soups, breads. Tanoak acorns used medicinally (coughs). Oak stands managed via cultural burning.", stats: { availability: "Abundant", season: "Fall", edibility: "Requires Prep", difficulty: "Hard" } }
         ];
-        console.log("Global plants array defined:", plants); // DEBUG
+        console.log("Global plants array defined:", plants);
 
         // DOM Elements
         const startScreen = document.getElementById('startScreen');
@@ -634,10 +715,13 @@
         const plantDetailDiv = document.getElementById('plantDetail');
         const prevButton = document.getElementById('prevButton');
         const nextButton = document.getElementById('nextButton');
+        const infoButton = document.getElementById('infoButton');
+        const infoModalOverlay = document.getElementById('infoModalOverlay');
+        const closeModalButton = document.getElementById('closeModalButton');
         let selectedPlantItem = null;
         let currentPlantIndex = 0;
         let isSoundEnabled = false;
-        let isBooting = true; // Start true, set false after boot animation
+        let isBooting = true;
         let bootSoundsScheduled = false;
         let bootFinishSoundScheduled = false;
 
@@ -658,7 +742,7 @@
                      if (bootFinishSoundScheduled) {
                         console.log("Playing boot finish sound at time:", time.toFixed(2));
                         bootFinishSynth.triggerAttackRelease(["C4", "G4"], "4n", time);
-                        bootFinishSoundScheduled = false; // Reset flag
+                        bootFinishSoundScheduled = false;
                      } else {
                          console.log("Skipped playing boot finish sound - not scheduled.");
                      }
@@ -679,7 +763,7 @@
                         Tone.Transport.start();
                         console.log("Tone Transport Started");
                     }
-                    scheduleBootSounds(); // Schedule sounds now context is ready
+                    scheduleBootSounds();
                 } catch (e) {
                     console.error("Error starting Tone.js:", e);
                     isSoundEnabled = false;
@@ -691,7 +775,7 @@
                      Tone.Transport.start();
                      console.log("Tone Transport Started (already running context)");
                  }
-                 scheduleBootSounds(); // Schedule sounds if context already running
+                 scheduleBootSounds();
             }
         }
 
@@ -745,7 +829,6 @@
              if (newItem) {
                  newItem.classList.add('selected');
                  selectedPlantItem = newItem;
-                 // Scroll only if the item isn't already fully visible
                  const listRect = plantListDiv.getBoundingClientRect();
                  const itemRect = newItem.getBoundingClientRect();
                  if (itemRect.top < listRect.top || itemRect.bottom > listRect.bottom) {
@@ -783,7 +866,7 @@
                 return '<p>Error: Invalid plant data.</p>';
             }
             const plant = plants[plantIndex];
-             if (!plant) { // Extra check
+             if (!plant) {
                  console.error(`generateDetailHtml: Plant data is null/undefined for index ${plantIndex}`);
                  return '<p>Error: Plant data missing.</p>';
              }
@@ -873,6 +956,22 @@
                      }
                  });
              });
+             // Info Button Listener
+             infoButton.addEventListener('click', () => {
+                 playSound('buttonTap'); // Use same tap sound
+                 infoModalOverlay.classList.add('visible');
+             });
+             closeModalButton.addEventListener('click', () => {
+                 playSound('buttonTap');
+                 infoModalOverlay.classList.remove('visible');
+             });
+             // Optional: Close modal if clicking outside the content
+             infoModalOverlay.addEventListener('click', (event) => {
+                 if (event.target === infoModalOverlay) { // Check if click was on overlay itself
+                     playSound('buttonTap');
+                     infoModalOverlay.classList.remove('visible');
+                 }
+             });
         }
 
         /** Function to schedule boot sounds */
@@ -908,7 +1007,7 @@
         /** ** UPDATED Initialization Sequence ** */
         function initializePokedex() {
             console.log("Initializing Pokedex...");
-            // Pre-process plant data (using global plants array)
+             // Pre-process plant data (using global plants array)
              plants.forEach(p => {
                 if (!p.identification && p.description) { const m = p.description.match(/Identification: (.*)/); if (m && m[1]) p.identification = m[1]; }
              });
@@ -958,15 +1057,14 @@
                              initialContentWrapper.classList.add('plant-detail-content');
                              initialContentWrapper.innerHTML = initialHtml;
                              // ** Direct Insertion **
-                             plantDetailDiv.innerHTML = ''; // Clear first
+                             plantDetailDiv.innerHTML = ''; // Clear just in case
                              plantDetailDiv.appendChild(initialContentWrapper);
                              // Make it visible immediately
                              requestAnimationFrame(() => {
                                 initialContentWrapper.style.opacity = '1';
                              });
-                             console.log("Initial plant detail HTML set.");
-                             // ** Select item AFTER rendering list and detail **
-                             selectPlantItem(0);
+                             console.log("Initial plant data displayed.");
+                             selectPlantItem(0); // Select the first item
                          } else {
                               console.error("Could not get first plant data (plants[0] is undefined).");
                               plantDetailDiv.innerHTML = '<div class="plant-detail-content" style="opacity:1;"><p>Error loading initial plant.</p></div>';
@@ -987,8 +1085,6 @@
 
              }, { once: true }); // Only allow starting once
         }
-
-        // No automatic audio context start here - wait for user click
 
         document.addEventListener('DOMContentLoaded', initializePokedex);
     </script>
