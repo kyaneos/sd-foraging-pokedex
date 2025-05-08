@@ -317,7 +317,19 @@
             margin-bottom: calc(var(--spacing-unit)*0.75);
             padding-bottom: calc(var(--spacing-unit) * 0.5);
             border-bottom: 1px solid var(--pokedex-screen-border);
-            display: inline-block; margin-top: 0;
+            display: block; /* Make it block to allow text-align */
+            text-align: center;
+            border-bottom: none; /* Remove bottom border for centered look */
+            margin-top: 0;
+         }
+         /* Add border back below centered heading */
+         .stats-section h3::after {
+            content: '';
+            display: block;
+            width: 50px; /* Adjust width as needed */
+            margin: calc(var(--spacing-unit) * 0.5) auto 0;
+            border-bottom: 1px solid var(--pokedex-screen-border);
+         }
          }
 
          .attribute-section p {
@@ -706,7 +718,7 @@
              { number: "002", name: "Lemonade Berry", image: "images/lemonade berry.jpeg", pixelArt: pixelArt.lemonade, description: "Lemonade Berry (Rhus integrifolia) is an evergreen shrub/small tree. Berries have a sticky, tart coating used to make a lemonade-like drink.", identification: "Leathery, toothed leaves, pinkish-white flower clusters, flattened reddish berries.", nativeAmericanUse: "'Iipay (Kumeyaay): Berry drink for constipation; fruit syrup for stomach aches/coughs; seed tea for fever; bark tea for babies. Berries eaten fresh or flavored water. Seeds ground, leached, boiled into mush.", stats: { availability: "Common", season: "Spring/Summer", edibility: "Good", difficulty: "Easy" } },
              { number: "003", name: "California Coffeeberry", image: "images/ca_coffeeberry.jpg", pixelArt: pixelArt.coffeeberry, description: "California Coffeeberry (Frangula californica) is a common evergreen shrub. Berries (red to black when ripe) are edible but often bland/bitter. Mild laxative effect.", identification: "Oval, glossy leaves, small greenish flowers, berry-like drupes ripening to black.", nativeAmericanUse: "Kumeyaay: Stored, boiled bark used as physic or for poison oak treatment. Berry infusion taken as tonic. Ohlone: Inner bark used as laxative and for poison oak rashes.", stats: { availability: "Common", season: "Summer/Fall", edibility: "Caution", difficulty: "Medium" } },
              { number: "004", name: "Toyon", image: "images/toyon.jpg", pixelArt: pixelArt.toyon, description: "Toyon (Heteromeles arbutifolia), or California Holly, is an evergreen shrub. Bright red berries in winter are edible *after cooking* (contain cyanide precursors raw).", identification: "Leathery, toothed leaves, clusters of small white flowers, bright red pomes (berries).", nativeAmericanUse: "Resource for Chumash, Tongva, Luiseno, Kumeyaay, Cahuilla. Kumeyaay: Pounded leaf pulp to wash sores. Fruit eaten after preparation. Bark/leaf infusions washed wounds. Tongva (ashuwet): Roasted/cooked/boiled berries for cider/jellies.", stats: { availability: "Common", season: "Fall/Winter", edibility: "Caution", difficulty: "Medium" } },
-             { number: "005", name: "Prickly Pear", image: "images/Prickly-pear.webp", pixelArt: pixelArt.pricklypear, description: "Prickly Pear (Opuntia species) cacti have edible pads (nopales) and fruits (tunas). Both need careful spine/glochid removal.", identification: "Fleshy, flattened pads with spines, yellow/red flowers, oval/pear-shaped fruits (tunas).", nativeAmericanUse: "Staple food/medicine. Fruits eaten fresh, made into candy, gum, mush, syrup, juice, jelly, or dried. Young pads (nopales) boiled as vegetable. Pads applied to wounds, rheumatism, mumps, swelling. Spines used as needles. Juice dyed textiles.", stats: { availability: "Common", season: "Summer/Fall (Fruit)"<p><p/>"Spring/Summer (Pads)", edibility: "Requires Prep", difficulty: "Hard" } },
+             { number: "005", name: "Prickly Pear", image: "images/Prickly-pear.webp", pixelArt: pixelArt.pricklypear, description: "Prickly Pear (Opuntia species) cacti have edible pads (nopales) and fruits (tunas). Both need careful spine/glochid removal.", identification: "Fleshy, flattened pads with spines, yellow/red flowers, oval/pear-shaped fruits (tunas).", nativeAmericanUse: "Staple food/medicine. Fruits eaten fresh, made into candy, gum, mush, syrup, juice, jelly, or dried. Young pads (nopales) boiled as vegetable. Pads applied to wounds, rheumatism, mumps, swelling. Spines used as needles. Juice dyed textiles.", stats: { availability: "Common", season: "Summer/Fall (Fruit)<br>Spring/Summer (Pads)", edibility: "Requires Prep", difficulty: "Hard" } },
              { number: "006", name: "Miner's Lettuce", image: "images/miners-lettuce.jpg", pixelArt: pixelArt.minerslettuce, description: "Miner's Lettuce (Claytonia perfoliata) is a succulent annual herb. Leaves/stems edible raw or cooked (good Vitamin C source). Named for miners using it against scurvy.", identification: "Basal leaves, stem leaves fused into a cup around the stem, small white/pinkish flowers emerging from cup center.", nativeAmericanUse: "Introduced to miners by Native Americans for Vitamin C. Leaves, stems, flowers, roots edible raw or cooked.", stats: { availability: "Common", season: "Winter/Spring/Summer", edibility: "High", difficulty: "Easy" } },
              { number: "007", name: "California Blackberry", image: "images/CaliforniaBlackberry.jpg", pixelArt: pixelArt.blackberry, description: "California Blackberry (Rubus ursinus) is a native trailing vine with thorns. Berries are smaller but often sweeter than cultivated ones.", identification: "Trailing thorny stems, compound leaves (usually 3 leaflets), white/pinkish flowers, small black aggregate fruits.", nativeAmericanUse: "Berries eaten fresh, ground for pemmican, or dried. Used medicinally for dysentery, diarrhea, coughs, sore throat, wounds. Root/leaf infusion for diarrhea, rheumatism, colds, coughs. Root wash for sore eyes. Stem decoction for UTIs. Canes used for basketry.", stats: { availability: "Common", season: "Summer", edibility: "High", difficulty: "Medium" } },
              { number: "008", name: "Elderberry", image: "images/elderberry.jpg", pixelArt: pixelArt.elderberry, description: "California Elderberry (Sambucus nigra ssp. caerulea) is a large shrub/small tree. Dark berries edible *when cooked* (jams, jellies, syrups); raw berries can be toxic.", identification: "Pinnately compound leaves, large flat-topped clusters of creamy white flowers, clusters of dark purple/black berries with white bloom.", nativeAmericanUse: "Kumeyaay: Bark healed wounds/sores. Berries dried, boiled, eaten (boiling removes toxins). Flowers boiled, rubbed on aching joints. Dried blossom tea for fever. Bark for skirts, branches for ceremonies. Cahuilla also used berries/twigs.", stats: { availability: "Common", season: "Summer/Fall", edibility: "Caution", difficulty: "Medium" } },
@@ -1053,7 +1065,8 @@
 
                      // ** Render list **
                      renderPlantList(); // Uses global plants
-
+                     setupGlobalNavButtons(); 
+                     
                      // ** Load initial plant data directly **
                      console.log("Attempting to load initial plant data. Global plants array length:", plants ? plants.length : 'undefined');
                      if (plants && plants.length > 0) {
@@ -1085,9 +1098,6 @@
                          prevButton.disabled = true;
                          nextButton.disabled = true;
                      }
-
-                     // ** Setup buttons AFTER initial load **
-                     setupGlobalNavButtons();
 
                      logOnScreen.addEventListener('transitionend', () => {
                         if (logOnScreen) logOnScreen.remove();
