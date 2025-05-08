@@ -347,6 +347,10 @@
             border-radius: var(--border-radius-sm);
             border: 1px solid var(--pokedex-screen-border);
             text-align: center; box-shadow: var(--shadow-inset-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 65px;
         }
         .stat-item .label {
             font-size: 0.6rem; font-weight: 500; color: var(--pokedex-text-secondary);
@@ -1065,7 +1069,6 @@
 
                      // ** Render list **
                      renderPlantList(); // Uses global plants
-                     setupGlobalNavButtons(); 
                      
                      // ** Load initial plant data directly **
                      console.log("Attempting to load initial plant data. Global plants array length:", plants ? plants.length : 'undefined');
@@ -1098,7 +1101,9 @@
                          prevButton.disabled = true;
                          nextButton.disabled = true;
                      }
-
+                     
+                     setupGlobalNavButtons(); 
+                     
                      logOnScreen.addEventListener('transitionend', () => {
                         if (logOnScreen) logOnScreen.remove();
                      }, { once: true });
