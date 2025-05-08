@@ -245,19 +245,26 @@
         .plant-core-info { /* Same */ }
 
         /* Image Section */
-        .plant-image-section {
+           .plant-image-section {
             background-color: var(--pokedex-list-bg);
             border: 1px solid var(--pokedex-screen-border);
             box-shadow: var(--shadow-inset);
             transition: transform var(--transition-speed-med) ease-out;
             padding: var(--spacing-unit);
             border-radius: var(--border-radius-sm); /* Consistent radius */
+            display: flex; /* Needed for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            min-height: 200px; /* Ensure minimum height */
         }
         .plant-image-section img {
              border-radius: var(--border-radius-sm); box-shadow: none; border: none;
              max-height: 280px;
-             display: block; max-width: 100%; height: auto;
+             display: block; /* Needed for margin auto */
+             max-width: 100%;
+             height: auto; /* Maintain aspect ratio */
              object-fit: cover;
+             /* margin: 0 auto; /* Center if smaller than container */ /* Removed, handled by flexbox */
         }
 
         /* Attributes Section (Desc, ID) */
@@ -549,7 +556,7 @@
              { number: "006", name: "Miner's Lettuce", image: "images/miners-lettuce.jpg", pixelArt: pixelArt.minerslettuce, description: "Miner's Lettuce (Claytonia perfoliata) is a succulent annual herb. Leaves/stems edible raw or cooked (good Vitamin C source). Named for miners using it against scurvy.", identification: "Basal leaves, stem leaves fused into a cup around the stem, small white/pinkish flowers emerging from cup center.", nativeAmericanUse: "Introduced to miners by Native Americans for Vitamin C. Leaves, stems, flowers, roots edible raw or cooked.", stats: { availability: "Common", season: "Spring", edibility: "High", difficulty: "Easy" } },
              { number: "007", name: "California Blackberry", image: "images/CaliforniaBlackberry.jpg", pixelArt: pixelArt.blackberry, description: "California Blackberry (Rubus ursinus) is a native trailing vine with thorns. Berries are smaller but often sweeter than cultivated ones.", identification: "Trailing thorny stems, compound leaves (usually 3 leaflets), white/pinkish flowers, small black aggregate fruits.", nativeAmericanUse: "Berries eaten fresh, ground for pemmican, or dried. Used medicinally for dysentery, diarrhea, coughs, sore throat, wounds. Root/leaf infusion for diarrhea, rheumatism, colds, coughs. Root wash for sore eyes. Stem decoction for UTIs. Canes used for basketry.", stats: { availability: "Common", season: "Summer", edibility: "High", difficulty: "Medium" } },
              { number: "008", name: "Elderberry", image: "images/elderberry.jpg", pixelArt: pixelArt.elderberry, description: "California Elderberry (Sambucus nigra ssp. caerulea) is a large shrub/small tree. Dark berries edible *when cooked* (jams, jellies, syrups); raw berries can be toxic.", identification: "Pinnately compound leaves, large flat-topped clusters of creamy white flowers, clusters of dark purple/black berries with white bloom.", nativeAmericanUse: "Kumeyaay: Bark healed wounds/sores. Berries dried, boiled, eaten (boiling removes toxins). Flowers boiled, rubbed on aching joints. Dried blossom tea for fever. Bark for skirts, branches for ceremonies. Cahuilla also used berries/twigs.", stats: { availability: "Common", season: "Summer/Fall", edibility: "Caution", difficulty: "Medium" } },
-             { number: "009", name: "Acorns", image: "images/acorns.jpg", pixelArt: pixelArt.acorns, description: "Acorns from Oak species (Quercus spp.) were a California staple. Not edible raw (high tannins); require extensive leaching.", identification: "Varies by oak species; recognizable nuts with a cap.", nativeAmericanUse: "Essential food (Kumeyaay, etc.). Highly nutritious but require leaching. Major community activity. Ground into flour, leached with water, made into mush (wewish/nupa), soups, breads. Tanoak acorns used medicinally (coughs). Oak stands managed via cultural burning.", stats: { availability: "Abundant", season: "Fall", edibility: "Requires Prep", difficulty: "Hard" } }
+             { number: "009", name: "Acorns", image: "images/acorns.jpeg", pixelArt: pixelArt.acorns, description: "Acorns from Oak species (Quercus spp.) were a California staple. Not edible raw (high tannins); require extensive leaching.", identification: "Varies by oak species; recognizable nuts with a cap.", nativeAmericanUse: "Essential food (Kumeyaay, etc.). Highly nutritious but require leaching. Major community activity. Ground into flour, leached with water, made into mush (wewish/nupa), soups, breads. Tanoak acorns used medicinally (coughs). Oak stands managed via cultural burning.", stats: { availability: "Abundant", season: "Fall", edibility: "Requires Prep", difficulty: "Hard" } }
         ];
         console.log("Global plants array defined:", plants); // DEBUG
 
