@@ -657,7 +657,7 @@
     </div>
 
     <script>
-        // --- Sound Synthesis (Tone.js) ---
+       // --- Sound Synthesis (Tone.js) ---
         const buttonTapSynth = new Tone.PluckSynth({ attackNoise: 0.5, dampening: 2500, resonance: 0.5, release: 0.1, volume: -12 }).toDestination();
         const selectSynth = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.05, release: 0.1 }, volume: -22 }).toDestination();
         const confirmSynth = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0, release: 0.25 }, volume: -20 }).toDestination();
@@ -689,7 +689,17 @@
 
 
         // --- Pixel Art SVGs ---
-        const pixelArt = { /* ... SVGs remain the same ... */ };
+        const pixelArt = {
+             buckwheat: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="4" height="1" fill="#f8bbd0"/><rect x="5" y="5" width="6" height="1" fill="#f48fb1"/><rect x="4" y="6" width="8" height="2" fill="#ffffff"/><rect x="5" y="8" width="6" height="1" fill="#f48fb1"/><rect x="6" y="9" width="4" height="1" fill="#f8bbd0"/><rect x="7" y="7" width="2" height="1" fill="#e91e63"/><rect x="7" y="10" width="1" height="2" fill="#66bb6a"/><rect x="8" y="10" width="1" height="3" fill="#4caf50"/></svg>`,
+             lemonade: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="2" height="3" fill="#f44336"/><rect x="8" y="5" width="2" height="3" fill="#e57373"/><rect x="5" y="7" width="3" height="3" fill="#f44336"/><rect x="8" y="8" width="3" height="3" fill="#e57373"/><rect x="7" y="10" width="2" height="2" fill="#8d6e63"/></svg>`,
+             coffeeberry: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="5" width="3" height="3" fill="#7e57c2"/><rect x="8" y="5" width="3" height="3" fill="#5e35b1"/><rect x="6" y="8" width="3" height="3" fill="#d81b60"/><rect x="9" y="8" width="3" height="3" fill="#c2185b"/><rect x="7" y="11" width="2" height="2" fill="#66bb6a"/><rect x="5" y="4" width="1" height="1" fill="#4caf50"/><rect x="10" y="4" width="1" height="1" fill="#4caf50"/></svg>`,
+             toyon: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="4" width="2" height="2" fill="#e53935"/><rect x="8" y="4" width="2" height="2" fill="#c62828"/><rect x="6" y="6" width="2" height="2" fill="#e53935"/><rect x="9" y="6" width="2" height="2" fill="#c62828"/><rect x="4" y="7" width="2" height="2" fill="#e53935"/><rect x="7" y="8" width="2" height="2" fill="#c62828"/><rect x="10" y="9" width="2" height="2" fill="#e53935"/><rect x="7" y="10" width="2" height="3" fill="#66bb6a"/></svg>`,
+             pricklypear: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="7" width="6" height="6" fill="#81c784"/><rect x="4" y="8" width="1" height="4" fill="#66bb6a"/><rect x="11" y="8" width="1" height="4" fill="#66bb6a"/><rect x="6" y="6" width="1" height="1" fill="#558b2f"/><rect x="9" y="6" width="1" height="1" fill="#558b2f"/><rect x="7" y="4" width="2" height="3" fill="#ec407a"/><rect x="6" y="5" width="1" height="1" fill="#d81b60"/><rect x="9" y="5" width="1" height="1" fill="#d81b60"/><rect x="5" y="13" width="6" height="1" fill="#a1887f"/></svg>`,
+             minerslettuce: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><path d="M8 2 A6 6 0 0 0 2 8 A6 6 0 0 0 8 14 A6 6 0 0 0 14 8 A6 6 0 0 0 8 2 Z" fill="#a5d6a7"/><path d="M8 4 A4 4 0 0 0 4 8 A4 4 0 0 0 8 12 A4 4 0 0 0 12 8 A4 4 0 0 0 8 4 Z" fill="#81c784"/><rect x="7" y="7" width="1" height="1" fill="#ffffff"/><rect x="8" y="7" width="1" height="1" fill="#e0e0e0"/><rect x="7" y="8" width="1" height="1" fill="#e0e0e0"/><rect x="8" y="8" width="1" height="1" fill="#ffffff"/><rect x="6" y="8" width="1" height="1" fill="#ffffff"/><rect x="9" y="7" width="1" height="1" fill="#ffffff"/></svg>`,
+             blackberry: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="2" height="2" fill="#212121"/><rect x="8" y="4" width="2" height="2" fill="#424242"/><rect x="5" y="6" width="2" height="2" fill="#212121"/><rect x="7" y="6" width="2" height="2" fill="#424242"/><rect x="9" y="6" width="2" height="2" fill="#212121"/><rect x="6" y="8" width="2" height="2" fill="#424242"/><rect x="8" y="8" width="2" height="2" fill="#212121"/><rect x="7" y="10" width="2" height="2" fill="#424242"/><rect x="7" y="3" width="2" height="1" fill="#66bb6a"/></svg>`,
+             elderberry: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="4" width="2" height="2" fill="#311b92"/><rect x="7" y="4" width="2" height="2" fill="#4527a0"/><rect x="9" y="4" width="2" height="2" fill="#311b92"/><rect x="4" y="6" width="2" height="2" fill="#4527a0"/><rect x="6" y="6" width="2" height="2" fill="#311b92"/><rect x="8" y="6" width="2" height="2" fill="#4527a0"/><rect x="10" y="6" width="2" height="2" fill="#311b92"/><rect x="5" y="8" width="2" height="2" fill="#311b92"/><rect x="7" y="8" width="2" height="2" fill="#4527a0"/><rect x="9" y="8" width="2" height="2" fill="#311b92"/><rect x="6" y="10" width="2" height="2" fill="#4527a0"/><rect x="8" y="10" width="2" height="2" fill="#311b92"/><rect x="7" y="12" width="2" height="2" fill="#8d6e63"/></svg>`,
+             acorns: `<svg viewBox="0 0 16 16" class="pixel-art-icon" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="6" height="3" fill="#a1887f"/><rect x="6" y="4" width="4" height="1" fill="#8d6e63"/><rect x="4" y="6" width="1" height="1" fill="#bcaaa4"/><rect x="11" y="6" width="1" height="1" fill="#bcaaa4"/><rect x="6" y="8" width="4" height="4" fill="#c8a415"/><rect x="5" y="9" width="1" height="2" fill="#b1900f"/><rect x="10" y="9" width="1" height="2" fill="#b1900f"/><rect x="7" y="12" width="2" height="1" fill="#866f0b"/></svg>`
+         };
         // --- Plant Data (Defined globally) ---
         const plants = [
              { number: "001", name: "California Buckwheat", image: "images/calibuckwheat.jpg", pixelArt: pixelArt.buckwheat, description: "California Buckwheat (Eriogonum fasciculatum) is a dominant shrub in coastal sage scrub. Its small flowers provide nectar for pollinators.", identification: "Woody shrub, narrow leaves, clusters of small white to pinkish flowers that dry to reddish-brown.", nativeAmericanUse: "Various tribes used it. Tea from leaves/stems/roots. Seeds eaten raw or used in porridges/baked items. Tongva used leaf tea; ground roots for headaches/stomach issues. Used for diarrhea, wounds. Zuni applied root poultice to cuts.", stats: { availability: "Abundant", season: "Summer/Fall", edibility: "Requires Prep", difficulty: "Medium" } },
@@ -1041,9 +1051,8 @@
                      isBooting = false;
                      logOnScreen.classList.add('hidden'); // Hide log-on screen
 
-                     // ** Render list and setup buttons **
+                     // ** Render list **
                      renderPlantList(); // Uses global plants
-                     setupGlobalNavButtons(); // Uses global plants implicitly
 
                      // ** Load initial plant data directly **
                      console.log("Attempting to load initial plant data. Global plants array length:", plants ? plants.length : 'undefined');
@@ -1076,6 +1085,9 @@
                          prevButton.disabled = true;
                          nextButton.disabled = true;
                      }
+
+                     // ** Setup buttons AFTER initial load **
+                     setupGlobalNavButtons();
 
                      logOnScreen.addEventListener('transitionend', () => {
                         if (logOnScreen) logOnScreen.remove();
